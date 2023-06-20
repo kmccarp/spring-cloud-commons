@@ -34,11 +34,11 @@ class SpringBootVersionVerifier implements CompatibilityVerifier {
 
 	private static final Log log = LogFactory.getLog(SpringBootVersionVerifier.class);
 
-	final Map<String, CompatibilityPredicate> ACCEPTED_VERSIONS = new HashMap<>() {
-		{
-			this.put("3.2", is3_2());
-		}
-	};
+	final Map<String, CompatibilityPredicate> ACCEPTED_VERSIONS;
+	{
+		ACCEPTED_VERSIONS = new HashMap<>();
+		ACCEPTED_VERSIONS.put("3.2", is32());
+	}
 
 	private final List<String> acceptedVersions;
 
@@ -71,7 +71,7 @@ class SpringBootVersionVerifier implements CompatibilityVerifier {
 		return SpringBootVersion.getVersion();
 	}
 
-	CompatibilityPredicate is3_2() {
+	CompatibilityPredicate is32() {
 		return new CompatibilityPredicate() {
 
 			@Override
@@ -97,7 +97,7 @@ class SpringBootVersionVerifier implements CompatibilityVerifier {
 		};
 	}
 
-	CompatibilityPredicate is3_1() {
+	CompatibilityPredicate is31() {
 		return new CompatibilityPredicate() {
 
 			@Override

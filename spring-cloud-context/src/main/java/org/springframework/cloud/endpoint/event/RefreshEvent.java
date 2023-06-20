@@ -27,6 +27,8 @@ import org.springframework.context.ApplicationEvent;
 @SuppressWarnings("serial")
 public class RefreshEvent extends ApplicationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private Object event;
 
 	private String eventDesc;

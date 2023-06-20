@@ -30,6 +30,8 @@ import org.springframework.core.env.Environment;
 @SuppressWarnings("serial")
 public class EnvironmentChangeEvent extends ApplicationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private Set<String> keys;
 
 	public EnvironmentChangeEvent(Set<String> keys) {

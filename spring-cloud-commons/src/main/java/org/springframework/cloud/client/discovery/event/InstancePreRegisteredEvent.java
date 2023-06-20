@@ -26,7 +26,9 @@ import org.springframework.context.ApplicationEvent;
  */
 public class InstancePreRegisteredEvent extends ApplicationEvent {
 
-	private Registration registration;
+	private static final long serialVersionUID = 1;
+
+	private final Registration registration;
 
 	/**
 	 * Create a new pre registration event.

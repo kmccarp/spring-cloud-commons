@@ -29,6 +29,8 @@ import org.springframework.retry.context.RetryContextSupport;
  */
 public class LoadBalancedRetryContext extends RetryContextSupport {
 
+	private static final long serialVersionUID = 1;
+
 	private HttpRequest request;
 
 	private ServiceInstance serviceInstance;

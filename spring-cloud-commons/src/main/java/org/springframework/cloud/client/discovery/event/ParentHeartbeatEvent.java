@@ -31,6 +31,8 @@ import org.springframework.context.ApplicationEvent;
 // Heartbeat events to a child. Avoids a stack overflow.
 public class ParentHeartbeatEvent extends ApplicationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final Object value;
 
 	public ParentHeartbeatEvent(Object source, Object value) {

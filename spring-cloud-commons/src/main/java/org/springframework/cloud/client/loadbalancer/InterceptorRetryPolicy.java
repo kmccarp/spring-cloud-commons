@@ -29,6 +29,8 @@ import org.springframework.retry.RetryPolicy;
  */
 public class InterceptorRetryPolicy implements RetryPolicy {
 
+	private static final long serialVersionUID = 1;
+
 	private final HttpRequest request;
 
 	private final LoadBalancedRetryPolicy policy;

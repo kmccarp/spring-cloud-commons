@@ -24,6 +24,8 @@ import org.springframework.context.ApplicationEvent;
 @SuppressWarnings("serial")
 public class RefreshScopeRefreshedEvent extends ApplicationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	/**
 	 * Default name for the refresh scope refreshed event.
 	 */

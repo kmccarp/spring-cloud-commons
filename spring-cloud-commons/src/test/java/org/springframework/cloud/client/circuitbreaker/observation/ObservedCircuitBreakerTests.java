@@ -36,12 +36,7 @@ class ObservedCircuitBreakerTests {
 
 	@Test
 	void should_wrap_circuit_breaker_in_observation() {
-		CircuitBreaker delegate = new CircuitBreaker() {
-			@Override
-			public <T> T run(Supplier<T> toRun, Function<Throwable, T> fallback) {
-				return toRun.get();
-			}
-		};
+		CircuitBreaker delegate = (toRun, fallback) -> toRun.get();
 		ObservedCircuitBreaker circuitBreaker = new ObservedCircuitBreaker(delegate, registry);
 
 		String result = circuitBreaker.run(() -> "hello");
@@ -55,12 +50,7 @@ class ObservedCircuitBreakerTests {
 
 	@Test
 	void should_wrap_circuit_breaker_in_observation_with_custom_convention() {
-		CircuitBreaker delegate = new CircuitBreaker() {
-			@Override
-			public <T> T run(Supplier<T> toRun, Function<Throwable, T> fallback) {
-				return toRun.get();
-			}
-		};
+		CircuitBreaker delegate = (toRun, fallback) -> toRun.get();
 		ObservedCircuitBreaker circuitBreaker = new ObservedCircuitBreaker(delegate, registry);
 		circuitBreaker.setCustomConvention(new CircuitBreakerObservationConvention() {
 
@@ -85,15 +75,12 @@ class ObservedCircuitBreakerTests {
 	@Test
 	void should_wrap_circuit_breaker_with_fallback_in_observation() {
 		TestObservationRegistry registry = TestObservationRegistry.create();
-		CircuitBreaker delegate = new CircuitBreaker() {
-			@Override
-			public <T> T run(Supplier<T> toRun, Function<Throwable, T> fallback) {
-				try {
-					return toRun.get();
-				}
-				catch (Throwable t) {
-					return fallback.apply(t);
-				}
+		CircuitBreaker delegate = (toRun, fallback) -> {
+			try {
+				return toRun.get();
+			}
+			catch (Throwable t) {
+				return fallback.apply(t);
 			}
 		};
 		ObservedCircuitBreaker circuitBreaker = new ObservedCircuitBreaker(delegate, registry);

@@ -29,6 +29,8 @@ import org.springframework.context.ApplicationEvent;
 @SuppressWarnings("serial")
 public class HeartbeatEvent extends ApplicationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final Object state;
 
 	/**

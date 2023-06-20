@@ -46,7 +46,7 @@ public class DiscoveredResource implements RemoteResource {
 
 	private RestOperations restOperations = new RestTemplate();
 
-	private Link link = null;
+	private Link link;
 
 	public DiscoveredResource(ServiceInstanceProvider provider, TraversalDefinition traversal) {
 		this.provider = provider;
@@ -111,7 +111,7 @@ public class DiscoveredResource implements RemoteResource {
 			return link;
 
 		}
-		catch (RestClientException o_O) {
+		catch (RestClientException oO) {
 
 			this.log.debug("Verification failed, marking as outdated!");
 			return null;
