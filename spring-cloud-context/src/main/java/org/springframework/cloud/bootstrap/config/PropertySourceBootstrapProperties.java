@@ -44,12 +44,12 @@ public class PropertySourceBootstrapProperties {
 	 * true, external properties should take lowest priority and should not override any
 	 * existing property sources (including local config files). Default false.
 	 */
-	private boolean overrideNone = false;
+	private boolean overrideNone;
 
 	/**
 	 * Flag to initialize bootstrap configuration on context refresh event. Default false.
 	 */
-	private boolean initializeOnContextRefresh = false;
+	private boolean initializeOnContextRefresh;
 
 	public boolean isInitializeOnContextRefresh() {
 		return initializeOnContextRefresh;

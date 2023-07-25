@@ -35,7 +35,7 @@ import org.springframework.util.Assert;
  */
 public class ReactiveDiscoveryCompositeHealthContributor implements CompositeReactiveHealthContributor {
 
-	private Map<String, ReactiveDiscoveryHealthIndicator> indicators;
+    private final Map<String, ReactiveDiscoveryHealthIndicator> indicators;
 
 	public ReactiveDiscoveryCompositeHealthContributor(Collection<ReactiveDiscoveryHealthIndicator> indicators) {
 		Assert.notNull(indicators, "'indicators' must not be null");

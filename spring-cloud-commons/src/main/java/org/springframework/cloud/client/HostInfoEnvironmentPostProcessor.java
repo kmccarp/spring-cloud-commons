@@ -35,8 +35,8 @@ import org.springframework.core.env.MapPropertySource;
  */
 public class HostInfoEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
 
-	// Before BootstrapConfigFileApplicationListener
-	private int order = Ordered.HIGHEST_PRECEDENCE + 9;
+    // Before BootstrapConfigFileApplicationListener
+    private final int order = Ordered.HIGHEST_PRECEDENCE + 9;
 
 	@Override
 	public int getOrder() {

@@ -85,9 +85,9 @@ public class GenericScope
 
 	private String id;
 
-	private Map<String, Exception> errors = new ConcurrentHashMap<>();
+    private final Map<String, Exception> errors = new ConcurrentHashMap<>();
 
-	private ConcurrentMap<String, ReadWriteLock> locks = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, ReadWriteLock> locks = new ConcurrentHashMap<>();
 
 	static RuntimeException wrapIfNecessary(Throwable throwable) {
 		if (throwable instanceof RuntimeException) {
@@ -495,7 +495,7 @@ public class GenericScope
 		}
 
 		private boolean isScopedObjectGetTargetObject(Method method) {
-			return method.getDeclaringClass().equals(ScopedObject.class) && method.getName().equals("getTargetObject")
+			return method.getDeclaringClass().equals(ScopedObject.class) && "getTargetObject".equals(method.getName())
 					&& method.getParameterTypes().length == 0;
 		}
 
