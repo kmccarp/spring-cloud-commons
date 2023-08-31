@@ -52,7 +52,7 @@ class DiscoveryClientBasedReactiveLoadBalancer implements ReactiveLoadBalancer<S
 	@Override
 	public Publisher<Response<ServiceInstance>> choose() {
 		List<ServiceInstance> instances = discoveryClient.getInstances(serviceId);
-		if (instances.size() == 0) {
+		if (instances.isEmpty()) {
 			return Mono.just(new EmptyResponse());
 		}
 		int instanceIdx = this.random.nextInt(instances.size());
@@ -72,7 +72,7 @@ class DiscoveryClientBasedReactiveLoadBalancer implements ReactiveLoadBalancer<S
 				}
 			}
 		}
-		if (instances.size() == 0) {
+		if (instances.isEmpty()) {
 			return Mono.just(new EmptyResponse());
 		}
 		int instanceIdx = this.random.nextInt(instances.size());
