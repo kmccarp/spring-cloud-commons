@@ -153,8 +153,7 @@ public class BootstrapConfigurationTests {
 	 * @return external properties resource location
 	 */
 	private String getExternalProperties() {
-		String externalPropertiesPath = "classpath:external-properties/bootstrap.properties";
-		return externalPropertiesPath;
+		return "classpath:external-properties/bootstrap.properties";
 	}
 
 	@Test
@@ -195,7 +194,7 @@ public class BootstrapConfigurationTests {
 			this.context = new SpringApplicationBuilder().web(WebApplicationType.NONE).properties(properties)
 					.sources(BareConfiguration.class).run();
 		});
-		then(throwable.getMessage().equals("Planned"));
+		then("Planned".equals(throwable.getMessage()));
 	}
 
 	@Test
@@ -688,7 +687,7 @@ public class BootstrapConfigurationTests {
 
 		private String name;
 
-		private boolean fail = false;
+		private boolean fail;
 
 		@Override
 		public PropertySource<?> locate(Environment environment) {
@@ -748,7 +747,7 @@ public class BootstrapConfigurationTests {
 
 		private String name;
 
-		private boolean fail = false;
+		private boolean fail;
 
 		@Override
 		public PropertySource<?> locate(Environment environment) {

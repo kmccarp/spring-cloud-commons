@@ -43,7 +43,7 @@ public class DiscoveryClientHealthIndicator
 
 	private final Log log = LogFactory.getLog(DiscoveryClientHealthIndicator.class);
 
-	private AtomicBoolean discoveryInitialized = new AtomicBoolean(false);
+	private final AtomicBoolean discoveryInitialized = new AtomicBoolean(false);
 
 	private int order = Ordered.HIGHEST_PRECEDENCE;
 

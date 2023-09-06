@@ -157,7 +157,7 @@ public class LoadBalancerProperties {
 		 * Indicates whether a cookie with the newly selected instance should be added by
 		 * SC LoadBalancer.
 		 */
-		private boolean addServiceInstanceCookie = false;
+		private boolean addServiceInstanceCookie;
 
 		public String getInstanceIdCookieName() {
 			return instanceIdCookieName;
@@ -182,7 +182,7 @@ public class LoadBalancerProperties {
 		/**
 		 * To Enable X-Forwarded Headers.
 		 */
-		private boolean enabled = false;
+		private boolean enabled;
 
 		public boolean isEnabled() {
 			return enabled;
@@ -230,7 +230,7 @@ public class LoadBalancerProperties {
 		 * instances can be updated and the underlying delegate does not provide an
 		 * ongoing flux.
 		 */
-		private boolean refetchInstances = false;
+		private boolean refetchInstances;
 
 		/**
 		 * Indicates whether health checks should keep repeating. It might be useful to
@@ -321,18 +321,18 @@ public class LoadBalancerProperties {
 		 * Indicates retries should be attempted on operations other than
 		 * {@link HttpMethod#GET}.
 		 */
-		private boolean retryOnAllOperations = false;
+		private boolean retryOnAllOperations;
 
 		/**
 		 * Indicates retries should be attempted for all exceptions, not only those
 		 * specified in {@code retryableExceptions}.
 		 */
-		private boolean retryOnAllExceptions = false;
+		private boolean retryOnAllExceptions;
 
 		/**
 		 * Number of retries to be executed on the same <code>ServiceInstance</code>.
 		 */
-		private int maxRetriesOnSameServiceInstance = 0;
+		private int maxRetriesOnSameServiceInstance;
 
 		/**
 		 * Number of retries to be executed on the next <code>ServiceInstance</code>. A
@@ -437,7 +437,7 @@ public class LoadBalancerProperties {
 			/**
 			 * Indicates whether Reactor Retry backoffs should be applied.
 			 */
-			private boolean enabled = false;
+			private boolean enabled;
 
 			/**
 			 * Used to set {@link RetryBackoffSpec#minBackoff}.
@@ -452,7 +452,7 @@ public class LoadBalancerProperties {
 			/**
 			 * Used to set {@link RetryBackoffSpec#jitter}.
 			 */
-			private double jitter = 0.5d;
+			private double jitter = 0.5D;
 
 			public Duration getMinBackoff() {
 				return minBackoff;

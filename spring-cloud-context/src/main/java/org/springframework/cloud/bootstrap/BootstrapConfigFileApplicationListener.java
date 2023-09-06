@@ -377,7 +377,7 @@ public class BootstrapConfigFileApplicationListener
 		private List<Profile> getOtherActiveProfiles(Set<Profile> activatedViaProperty,
 				Set<Profile> includedViaProperty) {
 			return Arrays.stream(this.environment.getActiveProfiles()).map(Profile::new).filter(
-					(profile) -> !activatedViaProperty.contains(profile) && !includedViaProperty.contains(profile))
+					profile -> !activatedViaProperty.contains(profile) && !includedViaProperty.contains(profile))
 					.collect(Collectors.toList());
 		}
 
@@ -400,7 +400,7 @@ public class BootstrapConfigFileApplicationListener
 		}
 
 		private void removeUnprocessedDefaultProfiles() {
-			this.profiles.removeIf((profile) -> (profile != null && profile.isDefaultProfile()));
+			this.profiles.removeIf(profile -> (profile != null && profile.isDefaultProfile()));
 		}
 
 		private DocumentFilter getPositiveProfileFilter(Profile profile) {
@@ -429,17 +429,17 @@ public class BootstrapConfigFileApplicationListener
 					}
 				}
 				MutablePropertySources merged = this.loaded.computeIfAbsent(profile,
-						(k) -> new MutablePropertySources());
+						k -> new MutablePropertySources());
 				addMethod.accept(merged, document.getPropertySource());
 			};
 		}
 
 		private void load(Profile profile, DocumentFilterFactory filterFactory, DocumentConsumer consumer) {
-			getSearchLocations().forEach((location) -> {
+			getSearchLocations().forEach(location -> {
 				String nonOptionalLocation = ConfigDataLocation.of(location).getValue();
 				boolean isDirectory = location.endsWith("/");
 				Set<String> names = isDirectory ? getSearchNames() : NO_SEARCH_NAMES;
-				names.forEach((name) -> load(nonOptionalLocation, name, profile, filterFactory, consumer));
+				names.forEach(name -> load(nonOptionalLocation, name, profile, filterFactory, consumer));
 			});
 		}
 
@@ -469,7 +469,7 @@ public class BootstrapConfigFileApplicationListener
 
 		private boolean canLoadFileExtension(PropertySourceLoader loader, String name) {
 			return Arrays.stream(loader.getFileExtensions())
-					.anyMatch((fileExtension) -> StringUtils.endsWithIgnoreCase(name, fileExtension));
+					.anyMatch(fileExtension -> StringUtils.endsWithIgnoreCase(name, fileExtension));
 		}
 
 		private void loadForFileExtension(PropertySourceLoader loader, String prefix, String fileExtension,
@@ -542,7 +542,7 @@ public class BootstrapConfigFileApplicationListener
 					}
 					Collections.reverse(loaded);
 					if (!loaded.isEmpty()) {
-						loaded.forEach((document) -> consumer.accept(profile, document));
+						loaded.forEach(document -> consumer.accept(profile, document));
 						if (this.logger.isDebugEnabled()) {
 							StringBuilder description = getDescription("Loaded config file ", location, resource,
 									profile);
@@ -601,7 +601,7 @@ public class BootstrapConfigFileApplicationListener
 			if (files != null) {
 				String fileName = locationReference.substring(locationReference.lastIndexOf("/") + 1);
 				Arrays.sort(files, FILE_COMPARATOR);
-				return Arrays.stream(files).map((file) -> file.listFiles((dir, name) -> name.equals(fileName)))
+				return Arrays.stream(files).map(file -> file.listFiles((dir, name) -> name.equals(fileName)))
 						.filter(Objects::nonNull).flatMap((Function<File[], Stream<File>>) Arrays::stream)
 						.map(FileSystemResource::new).toArray(Resource[]::new);
 			}
@@ -632,7 +632,7 @@ public class BootstrapConfigFileApplicationListener
 			if (loaded == null) {
 				return Collections.emptyList();
 			}
-			return loaded.stream().map((propertySource) -> {
+			return loaded.stream().map(propertySource -> {
 				Binder binder = new Binder(ConfigurationPropertySources.from(propertySource),
 						this.placeholdersResolver);
 				String[] profiles = binder.bind("spring.config.activate.on-profile", STRING_ARRAY).orElse(null);

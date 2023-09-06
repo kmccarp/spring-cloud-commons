@@ -84,14 +84,14 @@ class DiscoveryClientServiceInstanceListSupplierTests {
 				.thenReturn(Flux.just(instance("1host", false), instance("2host-secure", true)));
 		supplier = new DiscoveryClientServiceInstanceListSupplier(reactiveDiscoveryClient, environment);
 
-		StepVerifier.withVirtualTime(() -> supplier.get()).expectSubscription()
+		StepVerifier.withVirtualTime(supplier::get).expectSubscription()
 				.expectNext(Lists.list(instance("1host", false), instance("2host-secure", true))).thenCancel()
 				.verify(VERIFICATION_TIMEOUT);
 
 		when(reactiveDiscoveryClient.getInstances(SERVICE_ID)).thenReturn(
 				Flux.just(instance("1host", false), instance("2host-secure", true), instance("3host", false)));
 
-		StepVerifier.withVirtualTime(() -> supplier.get()).expectSubscription()
+		StepVerifier.withVirtualTime(supplier::get).expectSubscription()
 				.expectNext(
 						Lists.list(instance("1host", false), instance("2host-secure", true), instance("3host", false)))
 				.thenCancel().verify(VERIFICATION_TIMEOUT);

@@ -50,7 +50,7 @@ public class BootstrapImportSelector implements EnvironmentAware, DeferredImport
 
 	private Environment environment;
 
-	private MetadataReaderFactory metadataReaderFactory = new CachingMetadataReaderFactory();
+	private final MetadataReaderFactory metadataReaderFactory = new CachingMetadataReaderFactory();
 
 	@Override
 	public void setEnvironment(Environment environment) {
@@ -77,16 +77,14 @@ public class BootstrapImportSelector implements EnvironmentAware, DeferredImport
 		}
 		AnnotationAwareOrderComparator.sort(elements);
 
-		String[] classNames = elements.stream().map(e -> e.name).toArray(String[]::new);
-
-		return classNames;
+		return elements.stream().map(e -> e.name).toArray(String[]::new);
 	}
 
 	class OrderedAnnotatedElement implements AnnotatedElement {
 
 		private final String name;
 
-		private Order order = null;
+		private Order order;
 
 		private Integer value;
 

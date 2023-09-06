@@ -48,7 +48,7 @@ public class ReactiveDiscoveryClientHealthIndicator
 
 	private final DiscoveryClientHealthIndicatorProperties properties;
 
-	private AtomicBoolean discoveryInitialized = new AtomicBoolean(false);
+	private final AtomicBoolean discoveryInitialized = new AtomicBoolean(false);
 
 	private int order = Ordered.HIGHEST_PRECEDENCE;
 
