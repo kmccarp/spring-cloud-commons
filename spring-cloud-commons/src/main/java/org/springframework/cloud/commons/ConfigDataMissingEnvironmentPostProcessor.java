@@ -61,7 +61,7 @@ public abstract class ConfigDataMissingEnvironmentPostProcessor implements Envir
 	 */
 	public static final int ORDER = ConfigDataEnvironmentPostProcessor.ORDER + 1000;
 
-	private final Logger LOG = LoggerFactory.getLogger(ConfigDataMissingEnvironmentPostProcessor.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ConfigDataMissingEnvironmentPostProcessor.class);
 
 	@Override
 	public int getOrder() {
@@ -88,7 +88,7 @@ public abstract class ConfigDataMissingEnvironmentPostProcessor implements Envir
 
 	private List<Object> getConfigImports(ConfigurableEnvironment environment) {
 		MutablePropertySources propertySources = environment.getPropertySources();
-		List<Object> property = propertySources.stream().filter(this::propertySourceWithConfigImport)
+		return propertySources.stream().filter(this::propertySourceWithConfigImport)
 				.flatMap(propertySource -> {
 					List<Object> configImports = new ArrayList<>();
 					if (propertySource.getProperty(CONFIG_IMPORT_PROPERTY) != null) {
@@ -99,7 +99,6 @@ public abstract class ConfigDataMissingEnvironmentPostProcessor implements Envir
 					}
 					return configImports.stream();
 				}).collect(Collectors.toList());
-		return property;
 	}
 
 	private boolean propertySourceWithConfigImport(PropertySource propertySource) {
