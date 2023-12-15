@@ -79,7 +79,7 @@ public class RetryLoadBalancerInterceptor implements ClientHttpRequestIntercepto
 			if (context instanceof LoadBalancedRetryContext lbContext) {
 				serviceInstance = lbContext.getServiceInstance();
 				if (LOG.isDebugEnabled()) {
-					LOG.debug(String.format("Retrieved service instance from LoadBalancedRetryContext: %s",
+					LOG.debug("Retrieved service instance from LoadBalancedRetryContext: %s".formatted(
 							serviceInstance));
 				}
 			}
@@ -90,8 +90,10 @@ public class RetryLoadBalancerInterceptor implements ClientHttpRequestIntercepto
 			String hint = getHint(serviceName);
 			if (serviceInstance == null) {
 				if (LOG.isDebugEnabled()) {
-					LOG.debug("Service instance retrieved from LoadBalancedRetryContext: was null. "
-							+ "Reattempting service instance selection");
+					LOG.debug("""
+							Service instance retrieved from LoadBalancedRetryContext: was null. \
+							Reattempting service instance selection\
+							""");
 				}
 				ServiceInstance previousServiceInstance = null;
 				if (context instanceof LoadBalancedRetryContext lbContext) {
@@ -102,7 +104,7 @@ public class RetryLoadBalancerInterceptor implements ClientHttpRequestIntercepto
 				supportedLifecycleProcessors.forEach(lifecycle -> lifecycle.onStart(lbRequest));
 				serviceInstance = loadBalancer.choose(serviceName, lbRequest);
 				if (LOG.isDebugEnabled()) {
-					LOG.debug(String.format("Selected service instance: %s", serviceInstance));
+					LOG.debug("Selected service instance: %s".formatted(serviceInstance));
 				}
 				if (context instanceof LoadBalancedRetryContext lbContext) {
 					lbContext.setServiceInstance(serviceInstance);
@@ -125,7 +127,7 @@ public class RetryLoadBalancerInterceptor implements ClientHttpRequestIntercepto
 			int statusCode = response.getStatusCode().value();
 			if (retryPolicy != null && retryPolicy.retryableStatusCode(statusCode)) {
 				if (LOG.isDebugEnabled()) {
-					LOG.debug(String.format("Retrying on status code: %d", statusCode));
+					LOG.debug("Retrying on status code: %d".formatted(statusCode));
 				}
 				byte[] bodyCopy = StreamUtils.copyToByteArray(response.getBody());
 				response.close();

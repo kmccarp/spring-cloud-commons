@@ -32,7 +32,7 @@ import static org.assertj.core.api.BDDAssertions.then;
  * @author Ryan Baxter
  * @author Olga Maciaszek-Sharma
  */
-public class RetryLoadBalancerAutoConfigurationTests extends AbstractLoadBalancerAutoConfigurationTests {
+class RetryLoadBalancerAutoConfigurationTests extends AbstractLoadBalancerAutoConfigurationTests {
 
 	@Override
 	protected void assertLoadBalanced(RestTemplate restTemplate) {
@@ -51,7 +51,7 @@ public class RetryLoadBalancerAutoConfigurationTests extends AbstractLoadBalance
 	}
 
 	@Test
-	void testRetryDisabled() {
+	void retryDisabled() {
 		applicationContextRunner.withUserConfiguration(OneRestTemplate.class)
 				.withPropertyValues("spring.aop.proxyTargetClass=true", "spring.cloud.loadbalancer.retry.enabled=false")
 				.run(context -> {
@@ -64,7 +64,7 @@ public class RetryLoadBalancerAutoConfigurationTests extends AbstractLoadBalance
 	}
 
 	@Test
-	void testRetryDisabledWithRestClientBuilder() {
+	void retryDisabledWithRestClientBuilder() {
 		applicationContextRunner.withUserConfiguration(OneRestClientBuilder.class)
 				.withPropertyValues("spring.aop.proxyTargetClass=true", "spring.cloud.loadbalancer.retry.enabled=false")
 				.run(context -> {
@@ -78,7 +78,7 @@ public class RetryLoadBalancerAutoConfigurationTests extends AbstractLoadBalance
 	}
 
 	@Test
-	void testDefaultBackOffPolicy() {
+	void defaultBackOffPolicy() {
 		applicationContextRunner.withUserConfiguration(OneRestTemplate.class).run(context -> {
 			LoadBalancedRetryFactory loadBalancedRetryFactory = context.getBean(LoadBalancedRetryFactory.class);
 			then(loadBalancedRetryFactory).isInstanceOf(LoadBalancedRetryFactory.class);

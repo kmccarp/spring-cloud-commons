@@ -41,8 +41,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
-@SpringBootTest(classes = TestConfiguration.class, properties = { "messages.expiry.one=168", "messages.expiry.two=76" })
-public class ConfigurationPropertiesRebinderProxyIntegrationTests {
+@SpringBootTest(classes = TestConfiguration.class, properties = {"messages.expiry.one=168", "messages.expiry.two=76"})
+class ConfigurationPropertiesRebinderProxyIntegrationTests {
 
 	@Autowired
 	private TestProperties properties;
@@ -55,13 +55,13 @@ public class ConfigurationPropertiesRebinderProxyIntegrationTests {
 
 	@Test
 	@DirtiesContext
-	public void testAppendProperties() {
+	void appendProperties() {
 		// This comes out as a String not Integer if the rebinder processes the proxy
 		// instead of the target
-		then(this.properties.getExpiry().get("one")).isEqualTo(new Integer(168));
+		then(this.properties.getExpiry().get("one")).isEqualTo(Integer.valueOf(168));
 		TestPropertyValues.of("messages.expiry.one=56").applyTo(this.environment);
 		this.rebinder.rebind();
-		then(this.properties.getExpiry().get("one")).isEqualTo(new Integer(56));
+		then(this.properties.getExpiry().get("one")).isEqualTo(Integer.valueOf(56));
 	}
 
 	@Configuration(proxyBeanMethods = false)

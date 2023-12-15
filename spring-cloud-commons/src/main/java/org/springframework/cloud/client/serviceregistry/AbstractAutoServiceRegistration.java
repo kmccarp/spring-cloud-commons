@@ -110,8 +110,8 @@ public abstract class AbstractAutoServiceRegistration<R extends Registration>
 	@SuppressWarnings("deprecation")
 	public void onApplicationEvent(WebServerInitializedEvent event) {
 		ApplicationContext context = event.getApplicationContext();
-		if (context instanceof ConfigurableWebServerApplicationContext) {
-			if ("management".equals(((ConfigurableWebServerApplicationContext) context).getServerNamespace())) {
+		if (context instanceof ConfigurableWebServerApplicationContext applicationContext) {
+			if ("management".equals(applicationContext.getServerNamespace())) {
 				return;
 			}
 		}

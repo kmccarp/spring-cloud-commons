@@ -106,8 +106,8 @@ public class BootstrapApplicationListener implements ApplicationListener<Applica
 		ConfigurableApplicationContext context = null;
 		String configName = environment.resolvePlaceholders("${spring.cloud.bootstrap.name:bootstrap}");
 		for (ApplicationContextInitializer<?> initializer : event.getSpringApplication().getInitializers()) {
-			if (initializer instanceof ParentContextApplicationContextInitializer) {
-				context = findBootstrapContext((ParentContextApplicationContextInitializer) initializer, configName);
+			if (initializer instanceof ParentContextApplicationContextInitializer contextInitializer) {
+				context = findBootstrapContext(contextInitializer, configName);
 			}
 		}
 		if (context == null) {
@@ -227,9 +227,9 @@ public class BootstrapApplicationListener implements ApplicationListener<Applica
 			}
 			else {
 				PropertySource<?> target = environment.get(name);
-				if (target instanceof MapPropertySource && target != source && source instanceof MapPropertySource) {
-					Map<String, Object> targetMap = ((MapPropertySource) target).getSource();
-					Map<String, Object> map = ((MapPropertySource) source).getSource();
+				if (target instanceof MapPropertySource propertySource && target != source && source instanceof MapPropertySource propertySource) {
+					Map<String, Object> targetMap = propertySource.getSource();
+					Map<String, Object> map = propertySource.getSource();
 					for (String key : map.keySet()) {
 						if (!target.containsProperty(key)) {
 							targetMap.put(key, map.get(key));
@@ -243,8 +243,8 @@ public class BootstrapApplicationListener implements ApplicationListener<Applica
 
 	private void mergeAdditionalPropertySources(MutablePropertySources environment, MutablePropertySources bootstrap) {
 		PropertySource<?> defaultProperties = environment.get(DEFAULT_PROPERTIES);
-		ExtendedDefaultPropertySource result = defaultProperties instanceof ExtendedDefaultPropertySource
-				? (ExtendedDefaultPropertySource) defaultProperties
+		ExtendedDefaultPropertySource result = defaultProperties instanceof ExtendedDefaultPropertySource edps
+				? edps
 				: new ExtendedDefaultPropertySource(DEFAULT_PROPERTIES, defaultProperties);
 		for (PropertySource<?> source : bootstrap) {
 			if (!environment.contains(source.getName())) {
@@ -270,10 +270,10 @@ public class BootstrapApplicationListener implements ApplicationListener<Applica
 	private void addAncestorInitializer(SpringApplication application, ConfigurableApplicationContext context) {
 		boolean installed = false;
 		for (ApplicationContextInitializer<?> initializer : application.getInitializers()) {
-			if (initializer instanceof AncestorInitializer) {
+			if (initializer instanceof AncestorInitializer ancestorInitializer) {
 				installed = true;
 				// New parent
-				((AncestorInitializer) initializer).setParent(context);
+				ancestorInitializer.setParent(context);
 			}
 		}
 		if (!installed) {

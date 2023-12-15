@@ -73,7 +73,7 @@ public class ReactorLoadBalancerExchangeFilterFunction implements LoadBalancedEx
 		URI originalUrl = clientRequest.url();
 		String serviceId = originalUrl.getHost();
 		if (serviceId == null) {
-			String message = String.format("Request URI does not contain a valid hostname: %s", originalUrl);
+			String message = "Request URI does not contain a valid hostname: %s".formatted(originalUrl);
 			if (LOG.isWarnEnabled()) {
 				LOG.warn(message);
 			}
@@ -101,7 +101,7 @@ public class ReactorLoadBalancerExchangeFilterFunction implements LoadBalancedEx
 			}
 
 			if (LOG.isDebugEnabled()) {
-				LOG.debug(String.format("LoadBalancer has retrieved the instance for service %s: %s", serviceId,
+				LOG.debug("LoadBalancer has retrieved the instance for service %s: %s".formatted(serviceId,
 						instance.getUri()));
 			}
 			LoadBalancerProperties.StickySession stickySessionProperties = loadBalancerFactory.getProperties(serviceId)

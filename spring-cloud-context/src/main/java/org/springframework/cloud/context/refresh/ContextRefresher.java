@@ -176,10 +176,10 @@ public abstract class ContextRefresher {
 	}
 
 	private void extract(PropertySource<?> parent, Map<String, Object> result) {
-		if (parent instanceof CompositePropertySource) {
+		if (parent instanceof CompositePropertySource propertySource) {
 			try {
 				List<PropertySource<?>> sources = new ArrayList<>();
-				for (PropertySource<?> source : ((CompositePropertySource) parent).getPropertySources()) {
+				for (PropertySource<?> source : propertySource.getPropertySources()) {
 					sources.add(0, source);
 				}
 				for (PropertySource<?> source : sources) {
@@ -190,8 +190,8 @@ public abstract class ContextRefresher {
 				return;
 			}
 		}
-		else if (parent instanceof EnumerablePropertySource) {
-			for (String key : ((EnumerablePropertySource<?>) parent).getPropertyNames()) {
+		else if (parent instanceof EnumerablePropertySource source) {
+			for (String key : source.getPropertyNames()) {
 				result.put(key, parent.getProperty(key));
 			}
 		}

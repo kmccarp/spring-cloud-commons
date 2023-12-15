@@ -235,8 +235,8 @@ public class RefreshAutoConfiguration {
 				return false;
 			}
 			String type = definition.getBeanClassName();
-			if (!StringUtils.hasText(type) && registry instanceof BeanFactory) {
-				Class<?> cls = ((BeanFactory) registry).getType(name);
+			if (!StringUtils.hasText(type) && registry instanceof BeanFactory factory) {
+				Class<?> cls = factory.getType(name);
 				if (cls != null) {
 					type = cls.getName();
 				}

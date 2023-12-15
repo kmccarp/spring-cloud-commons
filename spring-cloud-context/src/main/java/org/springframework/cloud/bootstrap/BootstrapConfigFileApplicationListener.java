@@ -576,8 +576,8 @@ public class BootstrapConfigFileApplicationListener
 			if (!locationReference.contains("*")) {
 				return locationReference;
 			}
-			if (resource instanceof FileSystemResource) {
-				return ((FileSystemResource) resource).getPath();
+			if (resource instanceof FileSystemResource systemResource) {
+				return systemResource.getPath();
 			}
 			return resource.getDescription();
 		}

@@ -43,15 +43,15 @@ public class TaskSchedulerWrapper<T extends TaskScheduler> implements Initializi
 
 	@Override
 	public void destroy() throws Exception {
-		if (taskScheduler instanceof DisposableBean) {
-			((DisposableBean) this.taskScheduler).destroy();
+		if (taskScheduler instanceof DisposableBean bean) {
+			bean.destroy();
 		}
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (taskScheduler instanceof InitializingBean) {
-			((InitializingBean) this.taskScheduler).afterPropertiesSet();
+		if (taskScheduler instanceof InitializingBean bean) {
+			bean.afterPropertiesSet();
 		}
 	}
 

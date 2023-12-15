@@ -43,7 +43,7 @@ class LoadBalancerEagerContextInitializerTest {
 	private LoadBalancerClientFactory factory;
 
 	@Test
-	void testLoadBalancerInstanceShouldBeInitialized() {
+	void loadBalancerInstanceShouldBeInitialized() {
 		assertThat(LoadBalancerCounter.getCount()).isEqualTo(1);
 		factory.getInstance(LOAD_BALANCER);
 		assertThat(LoadBalancerCounter.getCount()).isEqualTo(1);

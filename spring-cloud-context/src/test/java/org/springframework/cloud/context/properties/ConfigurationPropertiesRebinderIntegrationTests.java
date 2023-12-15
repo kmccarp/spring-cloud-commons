@@ -45,7 +45,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 @ActiveProfiles("config")
 // TODO: fix and enable back
 @Disabled
-public class ConfigurationPropertiesRebinderIntegrationTests {
+class ConfigurationPropertiesRebinderIntegrationTests {
 
 	@Autowired
 	private TestProperties properties;
@@ -61,7 +61,7 @@ public class ConfigurationPropertiesRebinderIntegrationTests {
 
 	@Test
 	@DirtiesContext
-	public void testSimpleProperties() {
+	void simpleProperties() {
 		then(this.properties.getMessage()).isEqualTo("Hello scope!");
 		then(this.properties.getCount()).isEqualTo(1);
 		// Change the dynamic property source...
@@ -73,7 +73,7 @@ public class ConfigurationPropertiesRebinderIntegrationTests {
 
 	@Test
 	@DirtiesContext
-	public void testRefreshInParent() {
+	void refreshInParent() {
 		then(this.config.getName()).isEqualTo("parent");
 		// Change the dynamic property source...
 		TestPropertyValues.of("config.name=foo").applyTo(this.environment);
@@ -84,7 +84,7 @@ public class ConfigurationPropertiesRebinderIntegrationTests {
 
 	@Test
 	@DirtiesContext
-	public void testRefresh() {
+	void refresh() {
 		then(this.properties.getCount()).isEqualTo(1);
 		then(this.properties.getMessage()).isEqualTo("Hello scope!");
 		// Change the dynamic property source...
@@ -97,7 +97,7 @@ public class ConfigurationPropertiesRebinderIntegrationTests {
 
 	@Test
 	@DirtiesContext
-	public void testRefreshByName() {
+	void refreshByName() {
 		then(this.properties.getCount()).isEqualTo(1);
 		then(this.properties.getMessage()).isEqualTo("Hello scope!");
 		// Change the dynamic property source...

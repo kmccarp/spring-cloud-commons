@@ -52,9 +52,9 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
  */
 
 @SpringBootTest(classes = ClientApp.class,
-		properties = { "management.endpoints.web.exposure.include=*", "management.endpoint.env.post.enabled=true" },
+		properties = {"management.endpoints.web.exposure.include=*", "management.endpoint.env.post.enabled=true"},
 		webEnvironment = RANDOM_PORT)
-public class RefreshEndpointIntegrationTests {
+class RefreshEndpointIntegrationTests {
 
 	private static final String BASE_PATH = new WebEndpointProperties().getBasePath();
 
@@ -62,7 +62,7 @@ public class RefreshEndpointIntegrationTests {
 	private int port;
 
 	@Test
-	public void webAccess() throws Exception {
+	void webAccess() throws Exception {
 		TestRestTemplate template = new TestRestTemplate();
 		ResponseEntity<String> envResponse = template.exchange(
 				getUrlEncodedEntity("http://localhost:" + this.port + BASE_PATH + "/env", "message", "Hello Dave!"),

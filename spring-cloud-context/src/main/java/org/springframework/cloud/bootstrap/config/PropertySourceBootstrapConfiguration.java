@@ -294,8 +294,8 @@ public class PropertySourceBootstrapConfiguration implements ApplicationListener
 
 	private <T extends Collection<String>> T addProfilesTo(T profiles, PropertySource<?> propertySource,
 			String property, ConfigurableEnvironment environment) {
-		if (propertySource instanceof CompositePropertySource) {
-			for (PropertySource<?> nestedPropertySource : ((CompositePropertySource) propertySource)
+		if (propertySource instanceof CompositePropertySource source) {
+			for (PropertySource<?> nestedPropertySource : source
 					.getPropertySources()) {
 				addProfilesTo(profiles, nestedPropertySource, property, environment);
 			}

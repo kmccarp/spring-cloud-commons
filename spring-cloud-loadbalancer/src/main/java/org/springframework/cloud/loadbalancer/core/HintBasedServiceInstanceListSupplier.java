@@ -62,11 +62,11 @@ public class HintBasedServiceInstanceListSupplier extends DelegatingServiceInsta
 			return null;
 		}
 		String hint = null;
-		if (requestContext instanceof RequestDataContext) {
-			hint = getHintFromHeader((RequestDataContext) requestContext);
+		if (requestContext instanceof RequestDataContext context) {
+			hint = getHintFromHeader(context);
 		}
-		if (!StringUtils.hasText(hint) && requestContext instanceof HintRequestContext) {
-			hint = ((HintRequestContext) requestContext).getHint();
+		if (!StringUtils.hasText(hint) && requestContext instanceof HintRequestContext context) {
+			hint = context.getHint();
 		}
 		return hint;
 	}

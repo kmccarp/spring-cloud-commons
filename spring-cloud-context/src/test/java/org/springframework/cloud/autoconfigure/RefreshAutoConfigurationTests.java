@@ -77,7 +77,7 @@ class RefreshAutoConfigurationTests {
 	}
 
 	@Test
-	public void extraRefreshables() {
+	void extraRefreshables() {
 		try (ConfigurableApplicationContext context = getApplicationContext(WebApplicationType.NONE, Config.class,
 				"sealedconfig.foo=bar",
 				"spring.cloud.refresh.extra-refreshable:" + SealedConfigProps.class.getName())) {

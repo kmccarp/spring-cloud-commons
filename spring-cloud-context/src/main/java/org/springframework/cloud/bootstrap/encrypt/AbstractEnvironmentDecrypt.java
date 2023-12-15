@@ -84,9 +84,9 @@ public abstract class AbstractEnvironmentDecrypt {
 	}
 
 	protected void merge(PropertySource<?> source, Map<String, Object> properties) {
-		if (source instanceof CompositePropertySource) {
+		if (source instanceof CompositePropertySource propertySource) {
 
-			List<PropertySource<?>> sources = new ArrayList<>(((CompositePropertySource) source).getPropertySources());
+			List<PropertySource<?>> sources = new ArrayList<>(propertySource.getPropertySources());
 			Collections.reverse(sources);
 
 			for (PropertySource<?> nested : sources) {

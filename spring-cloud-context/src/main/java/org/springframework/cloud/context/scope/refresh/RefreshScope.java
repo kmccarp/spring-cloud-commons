@@ -145,8 +145,10 @@ public class RefreshScope extends GenericScope
 		return false;
 	}
 
-	@ManagedOperation(description = "Dispose of the current instance of bean name "
-			+ "provided and force a refresh on next method execution.")
+	@ManagedOperation(description = """
+			Dispose of the current instance of bean name \
+			provided and force a refresh on next method execution.\
+			""")
 	public boolean refresh(String name) {
 		if (!ScopedProxyUtils.isScopedTarget(name)) {
 			// User wants to refresh the bean with this name but that isn't the one in the
@@ -161,8 +163,10 @@ public class RefreshScope extends GenericScope
 		return false;
 	}
 
-	@ManagedOperation(description = "Dispose of the current instance of all beans "
-			+ "in this scope and force a refresh on next method execution.")
+	@ManagedOperation(description = """
+			Dispose of the current instance of all beans \
+			in this scope and force a refresh on next method execution.\
+			""")
 	public void refreshAll() {
 		super.destroy();
 		this.context.publishEvent(new RefreshScopeRefreshedEvent());

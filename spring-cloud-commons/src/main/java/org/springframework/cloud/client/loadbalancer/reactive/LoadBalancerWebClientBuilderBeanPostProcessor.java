@@ -44,11 +44,11 @@ public class LoadBalancerWebClientBuilderBeanPostProcessor implements BeanPostPr
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-		if (bean instanceof WebClient.Builder) {
+		if (bean instanceof WebClient.Builder builder) {
 			if (context.findAnnotationOnBean(beanName, LoadBalanced.class) == null) {
 				return bean;
 			}
-			((WebClient.Builder) bean).filter(exchangeFilterFunction);
+			builder.filter(exchangeFilterFunction);
 		}
 		return bean;
 	}

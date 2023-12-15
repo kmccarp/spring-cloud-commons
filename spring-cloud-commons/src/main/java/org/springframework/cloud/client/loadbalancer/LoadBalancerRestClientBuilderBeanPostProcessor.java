@@ -43,11 +43,11 @@ public class LoadBalancerRestClientBuilderBeanPostProcessor implements BeanPostP
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-		if (bean instanceof RestClient.Builder) {
+		if (bean instanceof RestClient.Builder builder) {
 			if (context.findAnnotationOnBean(beanName, LoadBalanced.class) == null) {
 				return bean;
 			}
-			((RestClient.Builder) bean).requestInterceptor(loadBalancerInterceptor);
+			builder.requestInterceptor(loadBalancerInterceptor);
 		}
 		return bean;
 	}

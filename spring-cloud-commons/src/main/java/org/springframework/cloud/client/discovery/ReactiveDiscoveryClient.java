@@ -75,8 +75,10 @@ public interface ReactiveDiscoveryClient extends Ordered {
 	@Deprecated
 	default void probe() {
 		if (LOG.isWarnEnabled()) {
-			LOG.warn("ReactiveDiscoveryClient#probe has been called. If you're calling this method directly, "
-					+ "use ReactiveDiscoveryClient#reactiveProbe instead.");
+			LOG.warn("""
+					ReactiveDiscoveryClient#probe has been called. If you're calling this method directly, \
+					use ReactiveDiscoveryClient#reactiveProbe instead.\
+					""");
 		}
 		getServices();
 	}

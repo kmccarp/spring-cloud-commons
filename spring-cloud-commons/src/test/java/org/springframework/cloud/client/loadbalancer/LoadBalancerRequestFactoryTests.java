@@ -34,12 +34,11 @@ import org.springframework.http.client.ClientHttpResponse;
 
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class LoadBalancerRequestFactoryTests {
+class LoadBalancerRequestFactoryTests {
 
 	@Mock
 	private LoadBalancerClient loadBalancer;
@@ -70,12 +69,12 @@ public class LoadBalancerRequestFactoryTests {
 	private ArgumentCaptor<HttpRequest> httpRequestCaptor;
 
 	@BeforeEach
-	public void setup() {
+	void setup() {
 		this.httpRequestCaptor = ArgumentCaptor.forClass(HttpRequest.class);
 	}
 
 	@Test
-	public void testNullTransformers() throws Exception {
+	void nullTransformers() throws Exception {
 		executeLbRequest(null);
 
 		verify(this.execution).execute(this.httpRequestCaptor.capture(), eq(this.body));
@@ -84,7 +83,7 @@ public class LoadBalancerRequestFactoryTests {
 	}
 
 	@Test
-	public void testEmptyTransformers() throws Exception {
+	void emptyTransformers() throws Exception {
 		List<LoadBalancerRequestTransformer> transformers = Collections.emptyList();
 
 		executeLbRequest(transformers);
@@ -95,7 +94,7 @@ public class LoadBalancerRequestFactoryTests {
 	}
 
 	@Test
-	public void testOneTransformer() throws Exception {
+	void oneTransformer() throws Exception {
 		List<LoadBalancerRequestTransformer> transformers = List.of(this.transformer1);
 		when(this.transformer1.transformRequest(any(ServiceRequestWrapper.class), eq(this.instance)))
 				.thenReturn(this.transformedRequest1);
@@ -109,7 +108,7 @@ public class LoadBalancerRequestFactoryTests {
 	}
 
 	@Test
-	public void testTwoTransformers() throws Exception {
+	void twoTransformers() throws Exception {
 		List<LoadBalancerRequestTransformer> transformers = Arrays.asList(this.transformer1, this.transformer2);
 		when(this.transformer1.transformRequest(any(ServiceRequestWrapper.class), eq(this.instance)))
 				.thenReturn(this.transformedRequest1);

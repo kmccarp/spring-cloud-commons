@@ -164,9 +164,9 @@ public abstract class NamedContextFactory<C extends NamedContextFactory.Specific
 		GenericApplicationContext context;
 		if (this.parent != null) {
 			DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
-			if (parent instanceof ConfigurableApplicationContext) {
+			if (parent instanceof ConfigurableApplicationContext applicationContext) {
 				beanFactory.setBeanClassLoader(
-						((ConfigurableApplicationContext) parent).getBeanFactory().getBeanClassLoader());
+						applicationContext.getBeanFactory().getBeanClassLoader());
 			}
 			else {
 				beanFactory.setBeanClassLoader(classLoader);

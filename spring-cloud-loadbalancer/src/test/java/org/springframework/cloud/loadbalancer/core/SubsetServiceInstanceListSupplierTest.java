@@ -52,12 +52,12 @@ class SubsetServiceInstanceListSupplierTest {
 	private MockEnvironment env;
 
 	@BeforeEach
-	public void setup() {
+	void setup() {
 		env = new MockEnvironment();
 	}
 
 	@AfterEach
-	public void destroy() {
+	void destroy() {
 		env = null;
 	}
 

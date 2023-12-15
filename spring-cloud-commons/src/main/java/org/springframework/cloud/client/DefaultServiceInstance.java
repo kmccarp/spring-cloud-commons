@@ -89,7 +89,7 @@ public class DefaultServiceInstance implements ServiceInstance {
 		if (port <= 0) {
 			port = (instance.isSecure()) ? 443 : 80;
 		}
-		String uri = String.format("%s://%s:%s", scheme, instance.getHost(), port);
+		String uri = "%s://%s:%s".formatted(scheme, instance.getHost(), port);
 		return URI.create(uri);
 	}
 

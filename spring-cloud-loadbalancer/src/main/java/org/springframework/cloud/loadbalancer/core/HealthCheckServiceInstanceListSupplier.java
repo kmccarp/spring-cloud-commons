@@ -93,15 +93,15 @@ public class HealthCheckServiceInstanceListSupplier extends DelegatingServiceIns
 			for (ServiceInstance instance : instances) {
 				Mono<ServiceInstance> alive = isAlive(instance).onErrorResume(error -> {
 					if (LOG.isDebugEnabled()) {
-						LOG.debug(String.format(
-								"Exception occurred during health check of the instance for service %s: %s",
+						LOG.debug(
+								"Exception occurred during health check of the instance for service %s: %s".formatted(
 								instance.getServiceId(), instance.getUri()), error);
 					}
 					return Mono.empty();
 				}).timeout(healthCheck.getInterval(), Mono.defer(() -> {
 					if (LOG.isDebugEnabled()) {
-						LOG.debug(String.format(
-								"The instance for service %s: %s did not respond for %s during health check",
+						LOG.debug(
+								"The instance for service %s: %s did not respond for %s during health check".formatted(
 								instance.getServiceId(), instance.getUri(), healthCheck.getInterval()));
 					}
 					return Mono.empty();

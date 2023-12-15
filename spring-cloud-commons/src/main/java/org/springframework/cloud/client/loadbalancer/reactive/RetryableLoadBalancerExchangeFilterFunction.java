@@ -82,7 +82,7 @@ public class RetryableLoadBalancerExchangeFilterFunction implements LoadBalanced
 		URI originalUrl = clientRequest.url();
 		String serviceId = originalUrl.getHost();
 		if (serviceId == null) {
-			String message = String.format("Request URI does not contain a valid hostname: %s", originalUrl);
+			String message = "Request URI does not contain a valid hostname: %s".formatted(originalUrl);
 			if (LOG.isWarnEnabled()) {
 				LOG.warn(message);
 			}
@@ -122,7 +122,7 @@ public class RetryableLoadBalancerExchangeFilterFunction implements LoadBalanced
 			}
 
 			if (LOG.isDebugEnabled()) {
-				LOG.debug(String.format("LoadBalancer has retrieved the instance for service %s: %s", serviceId,
+				LOG.debug("LoadBalancer has retrieved the instance for service %s: %s".formatted(serviceId,
 						instance.getUri()));
 			}
 			LoadBalancerProperties.StickySession stickySessionProperties = properties.getStickySession();
@@ -141,7 +141,7 @@ public class RetryableLoadBalancerExchangeFilterFunction implements LoadBalanced
 						loadBalancerRetryContext.setClientResponse(clientResponse);
 						if (shouldRetrySameServiceInstance(retryPolicy, loadBalancerRetryContext)) {
 							if (LOG.isDebugEnabled()) {
-								LOG.debug(String.format("Retrying on status code: %d",
+								LOG.debug("Retrying on status code: %d".formatted(
 										clientResponse.statusCode().value()));
 							}
 							throw new RetryableStatusCodeException();
@@ -153,7 +153,7 @@ public class RetryableLoadBalancerExchangeFilterFunction implements LoadBalanced
 			loadBalancerRetryContext.setClientResponse(clientResponse);
 			if (shouldRetryNextServiceInstance(retryPolicy, loadBalancerRetryContext)) {
 				if (LOG.isDebugEnabled()) {
-					LOG.debug(String.format("Retrying on status code: %d", clientResponse.statusCode().value()));
+					LOG.debug("Retrying on status code: %d".formatted(clientResponse.statusCode().value()));
 				}
 				throw new RetryableStatusCodeException();
 			}

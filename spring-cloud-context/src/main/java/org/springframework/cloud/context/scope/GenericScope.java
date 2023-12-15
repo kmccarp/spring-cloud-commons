@@ -90,11 +90,11 @@ public class GenericScope
 	private ConcurrentMap<String, ReadWriteLock> locks = new ConcurrentHashMap<>();
 
 	static RuntimeException wrapIfNecessary(Throwable throwable) {
-		if (throwable instanceof RuntimeException) {
-			return (RuntimeException) throwable;
+		if (throwable instanceof RuntimeException exception) {
+			return exception;
 		}
-		if (throwable instanceof Error) {
-			throw (Error) throwable;
+		if (throwable instanceof Error error) {
+			throw error;
 		}
 		return new IllegalStateException(throwable);
 	}
@@ -268,7 +268,7 @@ public class GenericScope
 	 */
 	private void setSerializationId(ConfigurableListableBeanFactory beanFactory) {
 
-		if (beanFactory instanceof DefaultListableBeanFactory) {
+		if (beanFactory instanceof DefaultListableBeanFactory factory) {
 
 			String id = this.id;
 			if (id == null) {
@@ -280,12 +280,15 @@ public class GenericScope
 			}
 
 			logger.info("BeanFactory id=" + id);
-			((DefaultListableBeanFactory) beanFactory).setSerializationId(id);
+			factory.setSerializationId(id);
 
 		}
 		else {
 			logger.warn(
-					"BeanFactory was not a DefaultListableBeanFactory, scoped proxy beans " + "cannot be serialized.");
+					"""
+					BeanFactory was not a DefaultListableBeanFactory, scoped proxy beans \
+					cannot be serialized.\
+					""");
 		}
 
 	}

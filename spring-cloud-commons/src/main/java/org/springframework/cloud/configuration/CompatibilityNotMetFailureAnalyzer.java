@@ -36,8 +36,11 @@ public final class CompatibilityNotMetFailureAnalyzer extends AbstractFailureAna
 	}
 
 	private String getDescription(CompatibilityNotMetException ex) {
-		return String.format(
-				"Your project setup is incompatible with our requirements " + "due to following reasons:%s",
+		return (
+				"""
+				Your project setup is incompatible with our requirements \
+				due to following reasons:%s\
+				""").formatted(
 				descriptions(ex.results));
 	}
 
@@ -50,7 +53,7 @@ public final class CompatibilityNotMetFailureAnalyzer extends AbstractFailureAna
 	}
 
 	private String getAction(CompatibilityNotMetException ex) {
-		return String.format("Consider applying the following actions:%s", actions(ex.results));
+		return "Consider applying the following actions:%s".formatted(actions(ex.results));
 	}
 
 	private String actions(List<VerificationResult> results) {

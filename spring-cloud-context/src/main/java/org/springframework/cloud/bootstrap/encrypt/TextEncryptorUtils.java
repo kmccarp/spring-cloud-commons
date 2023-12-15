@@ -150,8 +150,8 @@ public abstract class TextEncryptorUtils {
 	}
 
 	static boolean hasProperty(Object value) {
-		if (value instanceof String) {
-			return StringUtils.hasText((String) value);
+		if (value instanceof String string) {
+			return StringUtils.hasText(string);
 		}
 		return value != null;
 	}

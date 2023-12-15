@@ -69,8 +69,8 @@ public class RetryAwareServiceInstanceListSupplier extends DelegatingServiceInst
 			return filteredInstances;
 		}
 		if (LOG.isWarnEnabled()) {
-			LOG.warn(String.format(
-					"No instances found after removing previously used service instance from the search (%s). Returning all found instances.",
+			LOG.warn(
+					"No instances found after removing previously used service instance from the search (%s). Returning all found instances.".formatted(
 					previousServiceInstance));
 		}
 		return instances;

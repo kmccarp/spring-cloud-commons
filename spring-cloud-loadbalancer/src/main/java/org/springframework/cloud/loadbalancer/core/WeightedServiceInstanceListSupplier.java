@@ -91,8 +91,8 @@ public class WeightedServiceInstanceListSupplier extends DelegatingServiceInstan
 				int weight = weightFunction.apply(instance);
 				if (weight <= 0) {
 					if (LOG.isDebugEnabled()) {
-						LOG.debug(String.format(
-								"The weight of the instance %s should be a positive integer, but it got %d, using %d as default",
+						LOG.debug(
+								"The weight of the instance %s should be a positive integer, but it got %d, using %d as default".formatted(
 								instance.getInstanceId(), weight, DEFAULT_WEIGHT));
 					}
 					return DEFAULT_WEIGHT;
@@ -101,8 +101,8 @@ public class WeightedServiceInstanceListSupplier extends DelegatingServiceInstan
 			}
 			catch (Exception e) {
 				if (LOG.isDebugEnabled()) {
-					LOG.debug(String.format(
-							"Exception occurred during apply weight function to instance %s, using %d as default",
+					LOG.debug(
+							"Exception occurred during apply weight function to instance %s, using %d as default".formatted(
 							instance.getInstanceId(), DEFAULT_WEIGHT), e);
 				}
 				return DEFAULT_WEIGHT;

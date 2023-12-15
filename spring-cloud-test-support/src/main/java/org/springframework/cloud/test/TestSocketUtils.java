@@ -254,7 +254,7 @@ public abstract class TestSocketUtils {
 			do {
 				if (searchCounter > portRange) {
 					throw new IllegalStateException(
-							String.format("Could not find an available %s port in the range [%d, %d] after %d attempts",
+							"Could not find an available %s port in the range [%d, %d] after %d attempts".formatted(
 									name(), minPort, maxPort, searchCounter));
 				}
 				candidatePort = findRandomPort(minPort, maxPort);
@@ -291,7 +291,7 @@ public abstract class TestSocketUtils {
 
 			if (availablePorts.size() != numRequested) {
 				throw new IllegalStateException(
-						String.format("Could not find %d available %s ports in the range [%d, %d]", numRequested,
+						"Could not find %d available %s ports in the range [%d, %d]".formatted(numRequested,
 								name(), minPort, maxPort));
 			}
 

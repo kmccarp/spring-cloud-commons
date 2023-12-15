@@ -49,14 +49,16 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  */
 @Disabled
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT,
-		properties = { "security.oauth2.resource.jwt.keyValue=secret", "spring.cloud.mvc.token-relay.enabled=true",
-				"spring.autoconfigure.exclude=" })
-public class ResourceServerTokenRelayTests {
+		properties = {"security.oauth2.resource.jwt.keyValue=secret", "spring.cloud.mvc.token-relay.enabled=true",
+				"spring.autoconfigure.exclude="})
+class ResourceServerTokenRelayTests {
 
-	protected static final String TOKEN_VALID_UNTIL_2085 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
-			+ "eyJleHAiOjM2NDA2ODU4ODIsInVzZXJfbmFtZSI6InJlYWRlciIsImF1dGhvcml0aWVzIjpbIlJPTEVfUkVBREVSIl0s"
-			+ "Imp0aSI6ImRkOTAzZGM2LTI0NDctNDViMi04MDZjLTIzZjU3ODVhNGQ4MCIsImNsaWVudF9pZCI6IndlYi1hcHAiLCJzY29wZSI6WyJyZWFkIl19."
-			+ "6hoNtxmN1_o5Ki0D0ae4amSOTRmit3pmaqv-z1-Qk4Y";
+	protected static final String TOKEN_VALID_UNTIL_2085 = """
+			eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.\
+			eyJleHAiOjM2NDA2ODU4ODIsInVzZXJfbmFtZSI6InJlYWRlciIsImF1dGhvcml0aWVzIjpbIlJPTEVfUkVBREVSIl0s\
+			Imp0aSI6ImRkOTAzZGM2LTI0NDctNDViMi04MDZjLTIzZjU3ODVhNGQ4MCIsImNsaWVudF9pZCI6IndlYi1hcHAiLCJzY29wZSI6WyJyZWFkIl19.\
+			6hoNtxmN1_o5Ki0D0ae4amSOTRmit3pmaqv-z1-Qk4Y\
+			""";
 
 	protected static final String AUTH_HEADER_TO_BE_RELAYED = "Bearer " + TOKEN_VALID_UNTIL_2085;
 
@@ -72,7 +74,7 @@ public class ResourceServerTokenRelayTests {
 	AccessTokenContextRelay accessTokenContextRelay;
 
 	@Test
-	public void tokenRelayJWT() {
+	void tokenRelayJWT() {
 
 		mockServerToReceiveRelay.expect(requestTo("https://example.com/test"))
 				.andExpect(header("authorization", AUTH_HEADER_TO_BE_RELAYED))

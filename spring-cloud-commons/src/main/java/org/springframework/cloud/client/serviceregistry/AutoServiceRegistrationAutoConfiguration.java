@@ -40,7 +40,10 @@ public class AutoServiceRegistrationAutoConfiguration implements InitializingBea
 	public void afterPropertiesSet() {
 		if (this.autoServiceRegistration == null && this.properties.isFailFast()) {
 			throw new IllegalStateException(
-					"Auto Service Registration has " + "been requested, but there is no AutoServiceRegistration bean");
+					"""
+					Auto Service Registration has \
+					been requested, but there is no AutoServiceRegistration bean\
+					""");
 		}
 	}
 

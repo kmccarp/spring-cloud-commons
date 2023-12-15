@@ -103,14 +103,16 @@ public class DiscoveryClientServiceInstanceListSupplier implements ServiceInstan
 
 	private void logTimeout() {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Timeout occurred while retrieving instances for service %s."
-					+ "The instances could not be retrieved during %s", serviceId, timeout));
+			LOG.debug(("""
+					Timeout occurred while retrieving instances for service %s.\
+					The instances could not be retrieved during %s\
+					""").formatted(serviceId, timeout));
 		}
 	}
 
 	private void logException(Throwable error) {
 		if (LOG.isErrorEnabled()) {
-			LOG.error(String.format("Exception occurred while retrieving instances for service %s", serviceId), error);
+			LOG.error("Exception occurred while retrieving instances for service %s".formatted(serviceId), error);
 		}
 	}
 

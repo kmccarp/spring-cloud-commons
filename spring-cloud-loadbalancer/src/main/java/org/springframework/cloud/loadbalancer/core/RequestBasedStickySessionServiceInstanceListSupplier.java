@@ -59,8 +59,8 @@ public class RequestBasedStickySessionServiceInstanceListSupplier extends Delega
 	public Flux<List<ServiceInstance>> get(Request request) {
 		String instanceIdCookieName = properties.getStickySession().getInstanceIdCookieName();
 		Object context = request.getContext();
-		if ((context instanceof RequestDataContext)) {
-			MultiValueMap<String, String> cookies = ((RequestDataContext) context).getClientRequest().getCookies();
+		if ((context instanceof RequestDataContext dataContext)) {
+			MultiValueMap<String, String> cookies = dataContext.getClientRequest().getCookies();
 			if (cookies == null) {
 				return delegate.get(request);
 			}
@@ -83,7 +83,7 @@ public class RequestBasedStickySessionServiceInstanceListSupplier extends Delega
 		for (ServiceInstance serviceInstance : serviceInstances) {
 			if (cookie.equals(serviceInstance.getInstanceId())) {
 				if (LOG.isDebugEnabled()) {
-					LOG.debug(String.format("Returning the service instance: %s. Found for cookie: %s", serviceInstance,
+					LOG.debug("Returning the service instance: %s. Found for cookie: %s".formatted(serviceInstance,
 							cookie));
 				}
 				return Collections.singletonList(serviceInstance);
@@ -92,8 +92,8 @@ public class RequestBasedStickySessionServiceInstanceListSupplier extends Delega
 		// If the instances cannot be found based on the cookie,
 		// we return all the instances provided by the delegate.
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format(
-					"Service instance for cookie: %s not found. Returning all instances returned by delegate.",
+			LOG.debug(
+					"Service instance for cookie: %s not found. Returning all instances returned by delegate.".formatted(
 					cookie));
 		}
 		return serviceInstances;

@@ -103,8 +103,8 @@ public abstract class ConfigDataMissingEnvironmentPostProcessor implements Envir
 	}
 
 	private boolean propertySourceWithConfigImport(PropertySource propertySource) {
-		if (propertySource instanceof CompositePropertySource) {
-			return ((CompositePropertySource) propertySource).getPropertySources().stream()
+		if (propertySource instanceof CompositePropertySource source) {
+			return source.getPropertySources().stream()
 					.anyMatch(this::propertySourceWithConfigImport);
 		}
 		return propertySource.containsProperty(CONFIG_IMPORT_PROPERTY)

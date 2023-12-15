@@ -120,19 +120,19 @@ class SpringBootVersionVerifier implements CompatibilityVerifier {
 	private String errorDescription() {
 		String versionFromManifest = getVersionFromManifest();
 		if (StringUtils.hasText(versionFromManifest)) {
-			return String.format("Spring Boot [%s] is not compatible with this Spring Cloud release train",
+			return "Spring Boot [%s] is not compatible with this Spring Cloud release train".formatted(
 					versionFromManifest);
 		}
 		return "Spring Boot is not compatible with this Spring Cloud release train";
 	}
 
 	private String action() {
-		return String.format(
+		return 
 				"""
 						Change Spring Boot version to one of the following versions %s .
 						You can find the latest Spring Boot versions here [%s].\s
 						If you want to learn more about the Spring Cloud Release train compatibility, you can visit this page [%s] and check the [Release Trains] section.
-						If you want to disable this check, just set the property [spring.cloud.compatibility-verifier.enabled=false]""",
+						If you want to disable this check, just set the property [spring.cloud.compatibility-verifier.enabled=false]""".formatted(
 				this.acceptedVersions, "https://spring.io/projects/spring-boot#learn",
 				"https://spring.io/projects/spring-cloud#overview");
 	}
